@@ -1,23 +1,21 @@
 const { DataTypes } = require("sequelize");
-const sequelize = require("../dbConnect");
+const sequelize = require("../dbConnect.js");
+const Book = require("./book.js");
 
-const Category = sequelize.define(
-  "Category",
-  {
-    id: {
-      type: DataTypes.BIGINT,
-      autoIncrement: true,
-      primaryKey: true,
-    },
-    name: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      unique: true,
-    },
+const Category = sequelize.define("Category", {
+  id: {
+    type: DataTypes.INTEGER,
+    primaryKey: true,
+    autoIncrement: true,
   },
-  {
-    timestamps: true,
-  }
-);
+  name: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+});
+
+// Associations
+Category.belongsToMany(Book, { through: "BookCategory" });
+Book.belongsToMany(Category, { through: "BookCategory" });
 
 module.exports = Category;

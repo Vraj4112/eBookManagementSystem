@@ -27,12 +27,20 @@ const dotenv = require("dotenv");
 dotenv.config();
 
 const sequelize = new Sequelize(
-  process.env.DATABASE,
-  process.env.DB_USER,
-  process.env.DB_PASSWORD,
+  process.env.DATABASE || "ebook_portal",
+  process.env.DB_USER || "root",
+  process.env.DB_PASSWORD || "123456",
   {
-    host: process.env.DB_HOST,
+    host: process.env.DB_HOST || "localhost",
+    port: process.env.DB_PORT || 3306,
     dialect: "mysql",
+    dialectOptions: {
+      multipleStatements: true,
+      insecureAuth: true,
+    },
+    define: {
+      charset: "utf8mb4",
+    },
   }
 );
 
