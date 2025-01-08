@@ -27,11 +27,4 @@ const Book = sequelize.define(
   { timestamps: true }
 );
 
-// Associations
-Book.belongsToMany(Category, { through: "BookCategory" });
-Category.belongsToMany(Book, { through: "BookCategory" });
-
-Book.hasMany(Comment, { foreignKey: "bookId" });
-Comment.belongsTo(Book, { foreignKey: "bookId" });
-
 module.exports = Book;

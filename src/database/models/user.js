@@ -39,11 +39,4 @@ const User = sequelize.define(
   { timestamps: true } // Enable automatic creation of 'createdAt' and 'updatedAt'
 );
 
-// Associations
-User.hasMany(Book, { foreignKey: "authorId" });
-Book.belongsTo(User, { foreignKey: "authorId" });
-
-User.hasMany(Comment, { foreignKey: "moderatorId" });
-Comment.belongsTo(User, { foreignKey: "moderatorId" });
-
 module.exports = User;

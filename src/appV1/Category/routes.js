@@ -8,21 +8,36 @@ const {
   validateDeleteCategory,
   validateGetCategoryById,
 } = require("./validator");
+const {
+  createCategory,
+  getAllCategories,
+  getCategoryById,
+  updateCategory,
+  deleteCategory,
+} = require("./controller");
 
-router.post("/categories", isAuthor, jwt_auth_verify, validateCreateCategory);
-router.get("/categories");
-router.get("/categories/:id", validateGetCategoryById);
+router.post(
+  "/categories",
+  isAuthor,
+  jwt_auth_verify,
+  validateCreateCategory,
+  createCategory
+);
+router.get("/categories", getAllCategories);
+router.get("/categories/:id", validateGetCategoryById, getCategoryById);
 router.put(
   "/categories/:id",
   isAuthor,
   jwt_auth_verify,
-  validateUpdateCategory
+  validateUpdateCategory,
+  updateCategory
 );
 router.delete(
   "/categories/:id",
   isAuthor,
   jwt_auth_verify,
-  validateDeleteCategory
+  validateDeleteCategory,
+  deleteCategory
 );
 
 module.exports = router;

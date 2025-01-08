@@ -12,25 +12,38 @@ const {
   validateDeleteComment,
   validateGetCommentById,
 } = require("./validator");
+const {
+  createComment,
+  getCommentsByBookId,
+  updateCommentStatus,
+  deleteComment,
+} = require("./controller");
 
 router.post(
   "/books/:bookId/comments",
   isReader,
   jwt_auth_verify,
-  validateCreateComment
+  validateCreateComment,
+  createComment
 );
-router.get("/books/:bookId/comments", validateGetCommentById);
+router.get(
+  "/books/:bookId/comments",
+  validateGetCommentById,
+  getCommentsByBookId
+);
 router.put(
   "/comments/:id/approve",
   isAuthor,
   jwt_auth_verify,
-  validateUpdateCommentStatus
+  validateUpdateCommentStatus,
+  updateCommentStatus
 );
 router.delete(
   "/comments/:id",
   isAuthor,
   jwt_auth_verify,
-  validateDeleteComment
+  validateDeleteComment,
+  deleteComment
 );
 
 module.exports = router;

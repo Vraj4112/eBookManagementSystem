@@ -23,8 +23,4 @@ const Comment = sequelize.define(
   { timestamps: true } // Enable automatic creation of 'createdAt' and 'updatedAt'
 );
 
-// Associations
-Comment.belongsTo(Book, { foreignKey: "bookId" });
-Comment.belongsTo(User, { foreignKey: "moderatorId" });
-
 module.exports = Comment;

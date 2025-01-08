@@ -15,7 +15,7 @@ const sequelize = new Sequelize(
       multipleStatements: true,
       insecureAuth: true,
     },
-    logging: console.log,
+    //logging: console.log,
     define: {
       charset: "utf8mb4",
     },

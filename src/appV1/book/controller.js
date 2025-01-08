@@ -1,7 +1,7 @@
 // controllers/bookController.js
-const { Book } = require("../models");
-const { Category } = require("../models");
-const { Comment } = require("../models");
+const Book = require("../../database/models/book");
+const Category = require("../../database/models/category");
+const Comment = require("../../database/models/comment");
 
 const createBook = async (req, res) => {
   try {

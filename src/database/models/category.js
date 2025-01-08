@@ -18,8 +18,4 @@ const Category = sequelize.define(
   { timestamps: true } // Enable automatic creation of 'createdAt' and 'updatedAt'
 );
 
-// Associations
-Category.belongsToMany(Book, { through: "BookCategory" });
-Book.belongsToMany(Category, { through: "BookCategory" });
-
 module.exports = Category;

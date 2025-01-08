@@ -24,6 +24,16 @@ router.post(
   validateCreateBook,
   createBook
 );
+// src/routes/bookRoutes.js
+/**
+ * @swagger
+ * /books:
+ *   get:
+ *     description: Get all books
+ *     responses:
+ *       200:
+ *         description: A list of books
+ */
 router.get("/books", getAllBooks);
 router.get("/books/:id", validateGetBookById, getBookById);
 router.put(
