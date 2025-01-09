@@ -1,49 +1,35 @@
 const express = require("express");
 const router = express.Router();
-
-const {
-  isAuthor,
-  isReader,
-} = require("../../utilities/user-role-authorization");
+const user_role = require("../../utilities/user-role-authorization");
 const jwt_auth_verify = require("../../utilities/jwt-auth").verifyToken;
-const {
-  validateCreateComment,
-  validateUpdateCommentStatus,
-  validateDeleteComment,
-  validateGetCommentById,
-} = require("./validator");
-const {
-  createComment,
-  getCommentsByBookId,
-  updateCommentStatus,
-  deleteComment,
-} = require("./controller");
+const validator = require("./validator");
+const controller = require("./controller");
 
 router.post(
   "/books/:bookId/comments",
-  isReader,
+  user_role.isReader,
   jwt_auth_verify,
-  validateCreateComment,
-  createComment
+  validator.validateCreateComment,
+  controller.createComment
 );
 router.get(
   "/books/:bookId/comments",
-  validateGetCommentById,
-  getCommentsByBookId
+  validator.validateGetCommentById,
+  controller.getCommentsByBookId
 );
 router.put(
   "/comments/:id/approve",
-  isAuthor,
+  user_role.isAuthor,
   jwt_auth_verify,
-  validateUpdateCommentStatus,
-  updateCommentStatus
+  validator.validateUpdateCommentStatus,
+  controller.updateCommentStatus
 );
 router.delete(
   "/comments/:id",
-  isAuthor,
+  user_role.isAuthor,
   jwt_auth_verify,
-  validateDeleteComment,
-  deleteComment
+  validator.validateDeleteComment,
+  controller.deleteComment
 );
 
 module.exports = router;

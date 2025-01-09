@@ -1,9 +1,9 @@
 const express = require("express");
 const router = express.Router();
-const jwt_sign_token = require("../../utilities/jwt-auth").signToken;
-const { validateRegister, validateLogin } = require("./validator");
+const validator = require("./validator");
+const controller = require("./controller");
 
-router.post("/auth/register", validateRegister);
-router.post("/auth/login", jwt_sign_token, validateLogin);
+router.post("/register", validator.validateRegister, controller.registerUser);
+router.post("/login", validator.validateLogin, controller.loginUser);
 
 module.exports = router;

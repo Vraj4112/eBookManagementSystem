@@ -1,8 +1,8 @@
 require("dotenv").config();
-const src = require("./src/index");
-const db = require("./src/database/dbConnect");
-const initAssociations = require("./src/database/models/associations");
-const { swaggerSpec, swaggerUi } = require("./src/swagger.js"); // Import Swagger
+const src = require("./src/appVersionRouter");
+const db = require("./src/database/dbConnect.js");
+const initAssociations = require("./src/database/models/associations.js");
+const swaggerDocs = require("./src/swagger.js"); // Import Swagger
 
 const express = require("express");
 const body_parser = require("body-parser");
@@ -15,7 +15,7 @@ const PORT = process.env.PORT || 3002;
 const app = express();
 const route = express.Router();
 
-app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec)); // Serve Swagger UI at /api-docs endpoint
+swaggerDocs(app);
 // Middleware setup
 app.use(route);
 app.use(helmet);

@@ -1,43 +1,36 @@
 const express = require("express");
 const router = express.Router();
-const { isAuthor } = require("../../utilities/user-role-authorization");
+const isAuthor = require("../../utilities/user-role-authorization").isAuthor;
 const jwt_auth_verify = require("../../utilities/jwt-auth").verifyToken;
-const {
-  validateCreateCategory,
-  validateUpdateCategory,
-  validateDeleteCategory,
-  validateGetCategoryById,
-} = require("./validator");
-const {
-  createCategory,
-  getAllCategories,
-  getCategoryById,
-  updateCategory,
-  deleteCategory,
-} = require("./controller");
+const validator = require("./validator");
+const controller = require("./controller");
 
 router.post(
-  "/categories",
-  isAuthor,
+  "/",
   jwt_auth_verify,
-  validateCreateCategory,
-  createCategory
+  isAuthor,
+  validator.validateCreateCategory,
+  controller.createCategory
 );
-router.get("/categories", getAllCategories);
-router.get("/categories/:id", validateGetCategoryById, getCategoryById);
+router.get("/", controller.getAllCategories);
+router.get(
+  "/:id",
+  validator.validateGetCategoryById,
+  controller.getCategoryById
+);
 router.put(
-  "/categories/:id",
-  isAuthor,
+  "/:id",
   jwt_auth_verify,
-  validateUpdateCategory,
-  updateCategory
+  isAuthor,
+  validator.validateUpdateCategory,
+  controller.updateCategory
 );
 router.delete(
-  "/categories/:id",
-  isAuthor,
+  "/:id",
   jwt_auth_verify,
-  validateDeleteCategory,
-  deleteCategory
+  isAuthor,
+  validator.validateDeleteCategory,
+  controller.deleteCategory
 );
 
 module.exports = router;

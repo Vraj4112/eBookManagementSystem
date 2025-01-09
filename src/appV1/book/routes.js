@@ -1,44 +1,32 @@
-// routes/bookRoutes.js
 const express = require("express");
-const router = express.Router();
-const {
-  validateCreateBook,
-  validateUpdateBook,
-  validateDeleteBook,
-  validateGetBookById,
-} = require("./validator");
-const { isAuthor } = require("../../utilities/user-role-authorization");
+const route = express.Router();
+const validator = require("./validator");
+const isAuthor = require("../../utilities/user-role-authorization").isAuthor;
 const jwt_auth_verify = require("../../utilities/jwt-auth").verifyToken;
-const {
-  createBook,
-  getAllBooks,
-  getBookById,
-  updateBook,
-  deleteBook,
-} = require("./controller");
+const controller = require("./controller");
 
-router.post(
-  "/books",
-  isAuthor,
+route.post(
+  "/",
   jwt_auth_verify,
-  validateCreateBook,
-  createBook
+  isAuthor,
+  validator.validateCreateBook,
+  controller.createBook
 );
-router.get("/books", getAllBooks);
-router.get("/books/:id", validateGetBookById, getBookById);
-router.put(
-  "/books/:id",
-  isAuthor,
+route.get("/", controller.getAllBooks);
+route.get("/:id", validator.validateGetBookById, controller.getBookById);
+route.put(
+  "/:id",
   jwt_auth_verify,
-  validateUpdateBook,
-  updateBook
+  isAuthor,
+  validator.validateUpdateBook,
+  controller.updateBook
 );
-router.delete(
-  "/books/:id",
-  isAuthor,
+route.delete(
+  "/:id",
   jwt_auth_verify,
-  validateDeleteBook,
-  deleteBook
+  isAuthor,
+  validator.validateDeleteBook,
+  controller.deleteBook
 );
 
-module.exports = router;
+module.exports = route;

@@ -2,10 +2,10 @@
   "name": "eBookManagementSystem",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
-    "test": "nodemon index.js",
-    "start": "node index.js"
+    "test": "nodemon server.js",
+    "start": "node server.js"
   },
   "keywords": [],
   "author": "",

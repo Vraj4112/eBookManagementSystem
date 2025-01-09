@@ -21,6 +21,7 @@ const validateRegister = (req, res, next) => {
       "string.min": `"password" should have a minimum length of 6`,
       "any.required": `"password" is a required field`,
     }),
+    role: Joi.string().valid("reader", "author").optional(),
   });
 
   const { error } = registerValidator.validate(req.body);
